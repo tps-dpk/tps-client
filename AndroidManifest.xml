@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="de.wbh.projektarbeit.tps"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk android:minSdkVersion="8" />
+
+    <application
+        android:icon="@drawable/ic_launcher"
+        android:label="TPS Client"
+        android:name=".BusinessLogic" >
+        <activity
+            android:configChanges="orientation"
+            android:label="Anmeldung"
+            android:name=".activities.Login" >
+            <intent-filter >
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:label="Übersicht Arbeitsaufträge"
+            android:name=".activities.Tasks" />
+        <activity
+            android:label="Arbeitsauftrag"
+            android:name=".activities.Task" />
+        <activity
+            android:label="Einstellungen"
+            android:name=".activities.Preferences" />
+    </application>
+
+</manifest>
