@@ -8,6 +8,8 @@ public class Arbeitsauftrag implements Serializable {
 
 	private long nummer;
 
+	private String status;
+
 	private Date von;
 
 	private Date bis;
@@ -19,9 +21,10 @@ public class Arbeitsauftrag implements Serializable {
 	public Arbeitsauftrag() {
 	}
 
-	public Arbeitsauftrag(long pNummer, Date pVon, Date pBis,
+	public Arbeitsauftrag(long pNummer, String pStatus, Date pVon, Date pBis,
 			String pBeschreibung, Kunde pKunde) {
 		nummer = pNummer;
+		status = pStatus;
 		von = pVon;
 		bis = pBis;
 		beschreibung = pBeschreibung;
@@ -34,6 +37,14 @@ public class Arbeitsauftrag implements Serializable {
 
 	public void setNummer(long pNummer) {
 		nummer = pNummer;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String pStatus) {
+		status = pStatus;
 	}
 
 	public Date getVon() {

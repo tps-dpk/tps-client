@@ -4,31 +4,36 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
-    <uses-sdk android:minSdkVersion="8" />
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="8" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".BusinessLogic"
         android:icon="@drawable/ic_launcher"
-        android:label="TPS Client"
-        android:name=".BusinessLogic" >
+        android:label="TPS Client" >
         <activity
+            android:name=".activities.Login"
             android:configChanges="orientation"
-            android:label="Anmeldung"
-            android:name=".activities.Login" >
-            <intent-filter >
+            android:label="TPS Client" >
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:label="Übersicht Arbeitsaufträge"
-            android:name=".activities.Tasks" />
+            android:name=".activities.Tasks"
+            android:label="Übersicht Arbeitsaufträge" />
         <activity
-            android:label="Arbeitsauftrag"
-            android:name=".activities.Task" />
+            android:name=".activities.Task"
+            android:configChanges="orientation"
+            android:label="Arbeitsauftrag" />
         <activity
-            android:label="Einstellungen"
-            android:name=".activities.Preferences" />
+            android:name=".activities.Preferences"
+            android:label="Einstellungen" />
     </application>
 
 </manifest>

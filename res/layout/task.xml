@@ -6,6 +6,7 @@
     android:padding="10dp" >
 
     <Button
+        android:id="@+id/task_button_accept"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
@@ -13,6 +14,7 @@
         android:text="Arbeitsauftrag annehmen" />
 
     <Button
+        android:id="@+id/task_button_decline"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
@@ -20,6 +22,7 @@
         android:text="Arbeitsauftrag ablehnen" />
 
     <Button
+        android:id="@+id/task_button_done"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
@@ -47,9 +50,9 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/task_number"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="12345" />
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
     <LinearLayout
@@ -65,9 +68,9 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/task_von"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="12.04.12 11:00" />
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
     <LinearLayout
@@ -83,29 +86,22 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/task_bis"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="12.04.12 13:00" />
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:orientation="horizontal" >
+        android:text="Beschreibung:  "
+        android:textStyle="bold" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Beschreibung:  "
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Installation eine neuen Heizung Test Test Test Test Test" />
-    </LinearLayout>
+    <TextView
+        android:id="@+id/task_beschreibung"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -115,23 +111,47 @@
         android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/task_kunde_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Max Mustermann" />
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/task_kunde_strasse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/task_kunde_hausnr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/task_kunde_plz"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/task_kunde_ort"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 
     <TextView
+        android:id="@+id/task_kunde_telefon"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Berliner Str. 42" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="434343 Berlin" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="0176346353553" />
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

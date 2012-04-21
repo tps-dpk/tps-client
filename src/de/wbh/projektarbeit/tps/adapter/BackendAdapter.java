@@ -4,9 +4,10 @@ import de.wbh.projektarbeit.tps.model.Arbeitsauftraege;
 import de.wbh.projektarbeit.tps.model.Status;
 
 public interface BackendAdapter {
-	boolean changeStatus(long pArbeitsauftragNummer, Status pStatus);
+	boolean changeStatus(long pArbeitsauftragNummer, Status pStatus)
+			throws AdapterException;
 
-	Arbeitsauftraege getArbeitsauftraege();
+	Arbeitsauftraege getArbeitsauftraege() throws AdapterException;
 
-	boolean login(String pUserName, String pPassword);
+	boolean login(String pUserName, String pPassword) throws AdapterException;
 }

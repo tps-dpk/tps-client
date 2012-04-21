@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,9 +16,12 @@ import android.widget.EditText;
 import android.widget.Toast;
 import de.wbh.projektarbeit.tps.BusinessLogic;
 import de.wbh.projektarbeit.tps.R;
+import de.wbh.projektarbeit.tps.adapter.AdapterException;
 import de.wbh.projektarbeit.tps.adapter.BackendAdapter;
 
 public class Login extends Activity {
+	private static final String LOG_TAG = Login.class.getSimpleName();
+
 	private static final int DIALOG_LOGIN_FAILED_ID = 1;
 
 	private static final int DIALOG_LOGIN_PROGRESS_ID = 2;
@@ -45,7 +49,7 @@ public class Login extends Activity {
 			return new AlertDialog.Builder(this)
 					.setTitle("Anmeldung fehlgeschlagen")
 					.setMessage(
-							"Die Anmeldung ist fehlgeschlagen. Bitte versuchen Sie es erneut.")
+							"Die Anmeldung ist fehlgeschlagen. Bitte überprüfen Sie ihre Eingaben.")
 					.setPositiveButton("Ok", null).create();
 		case DIALOG_LOGIN_PROGRESS_ID:
 			return ProgressDialog.show(this, null,
@@ -68,15 +72,10 @@ public class Login extends Activity {
 		return true;
 	}
 
-	@Override
-	protected void onResume() {
-		super.onResume();
-	}
-
 	public void onClickLogin(View pView) {
 		Editable name = mNameView.getText();
 		Editable password = mPasswordView.getText();
-		
+
 		if (name == null || name.length() < 1) {
 			Toast.makeText(this, "Bitte geben Sie ihren Benutzernamen ein!",
 					Toast.LENGTH_LONG).show();
@@ -103,28 +102,45 @@ public class Login extends Activity {
 		return super.onOptionsItemSelected(pItem);
 	}
 
-	private class LoginTask extends AsyncTask<Void, Void, Void> {
+	private class LoginTask extends AsyncTask<Void, Void, Boolean> {
 		@Override
-		protected Void doInBackground(Void... pArguments) {
+		protected Boolean doInBackground(Void... pArguments) {
 			String name = mNameView.getText().toString();
 			String password = mPasswordView.getText().toString();
 
 			BackendAdapter adapter = ((BusinessLogic) Login.this
 					.getApplication()).getBackendAdapter();
-			adapter.login(name, password);
+			try {
+				return adapter.login(name, password);
+			} catch (AdapterException e) {
+				Log.e(LOG_TAG, "Logging in failed!", e);
+			}
 
 			return null;
 		}
 
 		@Override
-		protected void onPostExecute(Void pResult) {
+		protected void onPostExecute(Boolean pResult) {
 			super.onPostExecute(pResult);
 
 			removeDialog(DIALOG_LOGIN_PROGRESS_ID);
 
-			Intent i = new Intent(Login.this, Tasks.class);
-			startActivity(i);
-			finish();
+			if (pResult == null) {
+				showDialog(DIALOG_TECHNICAL_ERROR);
+
+				return;
+			}
+
+			if (pResult) {
+				Toast.makeText(Login.this, "Die Anmeldung war erfolgreich!",
+						Toast.LENGTH_LONG).show();
+
+				Intent i = new Intent(Login.this, Tasks.class);
+				startActivity(i);
+				finish();
+			} else {
+				showDialog(DIALOG_LOGIN_FAILED_ID);
+			}
 		}
 	}
 }
