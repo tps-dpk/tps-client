@@ -21,6 +21,7 @@ import org.apache.http.util.EntityUtils;
 import android.net.Uri;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import de.wbh.projektarbeit.tps.model.Arbeitsauftraege;
 import de.wbh.projektarbeit.tps.model.Status;
@@ -74,7 +75,7 @@ public class BackendAdapterImpl implements BackendAdapter {
 
 	@Override
 	public Arbeitsauftraege getArbeitsauftraege() throws AdapterException {
-		HttpGet request = new HttpGet(createUri("arbeitsauftraege.php"));
+		HttpGet request = new HttpGet(createUri("list.php"));
 
 		try {
 			HttpResponse response = mClient.execute(request);
@@ -83,8 +84,10 @@ public class BackendAdapterImpl implements BackendAdapter {
 
 			if (status.getStatusCode() == HttpStatus.SC_OK) {
 				String json = EntityUtils.toString(response.getEntity());
+				Gson gson = new GsonBuilder().setDateFormat(
+						"yyyy-MM-dd HH:mm:ss").create();
 
-				return new Gson().fromJson(json, Arbeitsauftraege.class);
+				return gson.fromJson(json, Arbeitsauftraege.class);
 			} else {
 				throw new AdapterException(
 						"Unexpected response with status code "
@@ -101,7 +104,7 @@ public class BackendAdapterImpl implements BackendAdapter {
 		HttpPost request = new HttpPost(createUri("login.php"));
 		List<NameValuePair> params = new ArrayList<NameValuePair>(2);
 		params.add(new BasicNameValuePair("name", pUserName));
-		params.add(new BasicNameValuePair("passwort", pPassword));
+		params.add(new BasicNameValuePair("password", pPassword));
 
 		try {
 			request.setEntity(new UrlEncodedFormEntity(params));

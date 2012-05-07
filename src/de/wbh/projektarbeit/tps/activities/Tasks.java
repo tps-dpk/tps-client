@@ -1,5 +1,8 @@
 package de.wbh.projektarbeit.tps.activities;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import android.app.AlertDialog;
@@ -107,8 +110,16 @@ public class Tasks extends ListActivity {
 				return;
 			}
 
-			setListAdapter(new TasksAdapter(Tasks.this,
-					pResult.getArbeitsauftraege()));
+			List<Arbeitsauftrag> tasks = new ArrayList<Arbeitsauftrag>(
+					pResult.getArbeitsauftraege());
+			Collections.sort(tasks, new Comparator<Arbeitsauftrag>() {
+				@Override
+				public int compare(Arbeitsauftrag pLhs, Arbeitsauftrag pRhs) {
+					return pLhs.getVon().compareTo(pRhs.getVon());
+				}
+			});
+
+			setListAdapter(new TasksAdapter(Tasks.this, tasks));
 		}
 	}
 

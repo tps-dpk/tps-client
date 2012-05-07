@@ -4,7 +4,7 @@ import android.app.Application;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import de.wbh.projektarbeit.tps.adapter.BackendAdapter;
-import de.wbh.projektarbeit.tps.adapter.FakeBackendAdapter;
+import de.wbh.projektarbeit.tps.adapter.BackendAdapterImpl;
 
 public class BusinessLogic extends Application {
 	private BackendAdapter mBackendAdapter;
@@ -15,8 +15,8 @@ public class BusinessLogic extends Application {
 					.getDefaultSharedPreferences(getApplicationContext());
 			String baseUrl = preferences.getString("backend_url", null);
 
-			mBackendAdapter = new FakeBackendAdapter();
-			// mBackendAdapter = new BackendAdapterImpl(baseUrl);
+			// mBackendAdapter = new FakeBackendAdapter();
+			mBackendAdapter = new BackendAdapterImpl(baseUrl);
 		}
 
 		return mBackendAdapter;

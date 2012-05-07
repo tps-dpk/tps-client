@@ -2,7 +2,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <EditTextPreference
-        android:defaultValue="http://localhost/tps"
+        android:defaultValue="http://localhost/tps/data/"
         android:key="backend_url"
         android:summary="Die Basis-URL der Datenschnittstelle des Backend-Systems"
         android:title="URL des Backend" />

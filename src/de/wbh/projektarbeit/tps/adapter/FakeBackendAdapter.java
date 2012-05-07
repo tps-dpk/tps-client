@@ -44,6 +44,6 @@ public class FakeBackendAdapter implements BackendAdapter {
 	@Override
 	public boolean login(String pUserName, String pPassword)
 			throws AdapterException {
-		return true;
+		throw new AdapterException(null);
 	}
 }
